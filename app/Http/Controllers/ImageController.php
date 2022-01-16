@@ -55,9 +55,40 @@ class ImageController extends Controller
         }
 
         //Guardar en la base de datos
-        $image->save();
+        //$image->save();
+        $url = "http://localhost:5000/images";
 
-        return redirect()->route('home')->with(['message' => 'Imagen subida correctamente']);
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $headers = array(
+            "Accept: application/json",
+            "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            $data = <<<DATA
+            {
+                "description":{
+                    "user_id": $user->id,
+                    "category_id": $category_id,
+                    "image_path": "$image_path_name",
+                    "description": "$description"
+                }
+            }
+            DATA;
+
+            \Log::error($data);
+
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data); 
+
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            var_dump($resp);
+
+        return redirect()->route('home')->with(['message' => "Imagen subida correctamente" ]);
     }
 
     public function getImage($filename){
@@ -90,7 +121,24 @@ class ImageController extends Controller
                 $like->delete();
             }
             //Borrar imagen
-            $image->delete();
+            //$image->delete();
+            $url = "http://localhost:5000/images/".$image->id;
+
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $headers = array(
+            "Accept: application/json",
+            "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            var_dump($resp);
+
             $message = array('message' => 'Imagen eliminada correctamente');
         }else{
             $message = array('message' => 'La imagen no se ha eliminado');
@@ -137,7 +185,37 @@ class ImageController extends Controller
         };
 
         //Actualizar imagen
-        $image->update();
+        //$image->update();
+        $url = "http://localhost:5000/images/".$image->id;
+
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $headers = array(
+            "Accept: application/json",
+            "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            $data = <<<DATA
+            {
+                "description":{
+                    "category_id": $category_id,
+                    "image_path": "$image_path_name",
+                    "description": "$description"
+                }
+            }
+            DATA;
+
+            \Log::error($data);
+
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data); 
+
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            var_dump($resp);
 
         return redirect()->route('image.detail', ['id'=>$image_id])->with(['message'=>'Imagen actualizada correctamente']);
     }
