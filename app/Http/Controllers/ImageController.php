@@ -55,8 +55,8 @@ class ImageController extends Controller
         }
 
         //Guardar en la base de datos
-        //$image->save();
-        $url = "http://localhost:5000/images";
+        $image->save();
+        /*$url = "http://localhost:5000/images";
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -86,7 +86,7 @@ class ImageController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);
+            var_dump($resp);*/
 
         return redirect()->route('home')->with(['message' => "Imagen subida correctamente" ]);
     }
