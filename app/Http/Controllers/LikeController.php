@@ -29,8 +29,8 @@ class LikeController extends Controller
             $like->user_id = $user->id;
             $like->image_id = (int)$image_id;
 
-            //$like->save();
-            $url = "http://localhost:5000/likes";
+            $like->save();
+            /*$url = "http://localhost:5000/likes";
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -58,7 +58,7 @@ class LikeController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);
+            var_dump($resp);*/
 
             return response()->json([
                 'like' => $like,
@@ -82,8 +82,8 @@ class LikeController extends Controller
                             ->first();
         if($like){
             //Eliminar like
-            //$like->delete();
-            $url = "http://localhost:5000/likes/".$like->id;
+            $like->delete();
+            /*$url = "http://localhost:5000/likes/".$like->id;
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -98,7 +98,7 @@ class LikeController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);
+            var_dump($resp);*/
 
 
             return response()->json([

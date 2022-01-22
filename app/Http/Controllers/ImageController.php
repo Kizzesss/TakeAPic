@@ -121,8 +121,8 @@ class ImageController extends Controller
                 $like->delete();
             }
             //Borrar imagen
-            //$image->delete();
-            $url = "http://localhost:5000/images/".$image->id;
+            $image->delete();
+            /*$url = "http://localhost:5000/images/".$image->id;
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -137,7 +137,7 @@ class ImageController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);
+            var_dump($resp);*/
 
             $message = array('message' => 'Imagen eliminada correctamente');
         }else{
@@ -185,8 +185,8 @@ class ImageController extends Controller
         };
 
         //Actualizar imagen
-        //$image->update();
-        $url = "http://localhost:5000/images/".$image->id;
+        $image->update();
+        /*$url = "http://localhost:5000/images/".$image->id;
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -215,7 +215,7 @@ class ImageController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);
+            var_dump($resp);*/
 
         return redirect()->route('image.detail', ['id'=>$image_id])->with(['message'=>'Imagen actualizada correctamente']);
     }
