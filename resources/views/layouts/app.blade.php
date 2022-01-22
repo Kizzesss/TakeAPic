@@ -7,29 +7,29 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" type="image/png" href="{{ secure_asset('/software/favicon2.0.png') }}">
-    <link rel="shortcut icon" sizes="192x192" href="{{ secure_asset('/software/favicon2.0.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/software/favicon2.0.png') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('/software/favicon2.0.png') }}">
 
     <title>TakeAPic</title>
 
     <!-- Scripts -->
-    <script src="{{ secure_asset('js/app.js') }}" defer></script>
-    <script src="{{ secure_asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/takeapic/public/software/favicon2.0.png" alt=""  height="25" class="d-inline-block align-text-top">
                     TakeAPic
                 </a>

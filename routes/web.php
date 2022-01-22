@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
@@ -27,7 +26,7 @@ Route::get('/', function () {
 
 //Generales
 Auth::routes();
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Usuarios
 Route::get('/config', [UserController::class, 'config'])->name('config');
