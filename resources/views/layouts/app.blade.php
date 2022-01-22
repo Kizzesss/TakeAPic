@@ -29,7 +29,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="/takeapic/public/software/favicon2.0.png" alt=""  height="25" class="d-inline-block align-text-top">
                     TakeAPic
                 </a>
