@@ -36,7 +36,37 @@ class CommentController extends Controller
         $comment->content = $content;
         
         //Guardar en la base de datos
-        $comment->save();
+        //$comment->save();
+        $url = "https://takeapicapi.herokuapp.com/comments";
+
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $headers = array(
+            "Accept: application/json",
+            "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            $data = <<<DATA
+            {
+                
+                "user_id": $user->id,
+                "image_id": $image_id,
+                "content": "$content"
+                
+            }
+            DATA;
+
+            \Log::error($data);
+
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $data); 
+
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            var_dump($resp);
 
         //Redireccion
         return redirect()->route('image.detail', ['id' => $image_id])->with(['message' => 'Comentario añadido correctamente']);
@@ -51,7 +81,23 @@ class CommentController extends Controller
         
         //Comprobar si soy el dueño del comentario o de la imagen
         if($user && ($comment->user_id == $user->id || $comment->image->user_id == $user->id)){
-            $comment->delete();
+            //$comment->delete();
+            $url = "https://takeapicapi.herokuapp.com/comments/".$comment->id;
+
+            $curl = curl_init($url);
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+            $headers = array(
+            "Accept: application/json",
+            "Content-Type: application/json",
+            );
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+
+            $resp = curl_exec($curl);
+            curl_close($curl);
+            var_dump($resp);
             $message = 'Comentario eliminado correctamente';
             return redirect()->route('image.detail', ['id' => $comment->image_id])->with(['message' => $message]);
         }else{

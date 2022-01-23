@@ -55,8 +55,8 @@ class ImageController extends Controller
         }
 
         //Guardar en la base de datos
-        $image->save();
-        /*$url = "http://localhost:5000/images";
+        //$image->save();
+        $url = "https://takeapicapi.herokuapp.com/images";
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -71,12 +71,12 @@ class ImageController extends Controller
 
             $data = <<<DATA
             {
-                "description":{
-                    "user_id": $user->id,
-                    "category_id": $category_id,
-                    "image_path": "$image_path_name",
-                    "description": "$description"
-                }
+                
+                "user_id": $user->id,
+                "category_id": $category_id,
+                "image_path": "$image_path_name",
+                "description": "$description"
+                
             }
             DATA;
 
@@ -86,7 +86,7 @@ class ImageController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);*/
+            var_dump($resp);
 
         return redirect()->route('home')->with(['message' => "Imagen subida correctamente" ]);
     }
@@ -121,8 +121,8 @@ class ImageController extends Controller
                 $like->delete();
             }
             //Borrar imagen
-            $image->delete();
-            /*$url = "http://localhost:5000/images/".$image->id;
+            //$image->delete();
+            $url = "https://takeapicapi.herokuapp.com/images/".$image->id;
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -137,7 +137,7 @@ class ImageController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);*/
+            var_dump($resp);
 
             $message = array('message' => 'Imagen eliminada correctamente');
         }else{
@@ -185,8 +185,8 @@ class ImageController extends Controller
         };
 
         //Actualizar imagen
-        $image->update();
-        /*$url = "http://localhost:5000/images/".$image->id;
+        //$image->update();
+        $url = "https://takeapicapi.herokuapp.com/up-images/".$image->id;
 
             $curl = curl_init($url);
             curl_setopt($curl, CURLOPT_URL, $url);
@@ -201,11 +201,11 @@ class ImageController extends Controller
 
             $data = <<<DATA
             {
-                "description":{
-                    "category_id": $category_id,
-                    "image_path": "$image_path_name",
-                    "description": "$description"
-                }
+
+                "category_id": $category_id,
+                "image_path": "$image_path_name",
+                "description": "$description"
+                
             }
             DATA;
 
@@ -215,7 +215,7 @@ class ImageController extends Controller
 
             $resp = curl_exec($curl);
             curl_close($curl);
-            var_dump($resp);*/
+            var_dump($resp);
 
         return redirect()->route('image.detail', ['id'=>$image_id])->with(['message'=>'Imagen actualizada correctamente']);
     }
